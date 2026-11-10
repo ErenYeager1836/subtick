@@ -19,7 +19,7 @@ void test_ack_bitfield_and_sequence_window() {
     // Server receives 0, 1, and 3 (simulating packet 2 lost!)
     server.process_incoming_header(p0);
     server.process_incoming_header(p1);
-    // packet 2 dropped
+    (void)p2; // packet 2 dropped
     server.process_incoming_header(p3);
 
     TEST_ASSERT(server.remote_ack() == 3);

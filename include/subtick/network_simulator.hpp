@@ -22,9 +22,11 @@ public:
         uint32_t jitter_ms{0};             // Latency variance in milliseconds
         float duplicate_rate{0.0f};        // Duplicate packet injection rate
         float reorder_rate{0.0f};          // Out-of-order delivery rate
+
+        Config() = default;
     };
 
-    explicit NetworkSimulator(Config config = {}, uint32_t seed = 42)
+    explicit NetworkSimulator(Config config = Config{}, uint32_t seed = 42)
         : config_(config), rng_(seed), dist_01_(0.0f, 1.0f) {}
 
     void send(Packet packet) {
