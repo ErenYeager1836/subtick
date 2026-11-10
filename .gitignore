@@ -1,0 +1,17 @@
+# Build directory
+build/
+bin/
+lib/
+
+# Visual Studio / MSVC artifacts
+.vs/
+*.user
+*.suo
+*.VC.db
+x64/
+Release/
+Debug/
+
+# OS files
+.DS_Store
+Thumbs.db
