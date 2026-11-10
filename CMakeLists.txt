@@ -29,6 +29,9 @@ set(TEST_TARGETS
     test_simulator
     test_subtick
     test_delta
+    test_lag_compensation
+    test_prediction
+    test_fragmentation
 )
 
 foreach(TGT ${TEST_TARGETS})

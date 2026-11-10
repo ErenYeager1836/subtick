@@ -9,3 +9,6 @@
 #include "subtick/network_simulator.hpp"
 #include "subtick/subtick_queue.hpp"
 #include "subtick/delta.hpp"
+#include "subtick/lag_compensation.hpp"
+#include "subtick/prediction.hpp"
+#include "subtick/fragmentation.hpp"

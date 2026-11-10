@@ -15,6 +15,9 @@ Designed for real-time multiplayer games that require millisecond-accurate physi
 - **Lean 12-Byte Wire Header**: Magic Protocol ID, 16-bit Sequence, 16-bit Remote ACK, and 32-bit ACK history bitfield.
 - **Sliding Window Reliability**: Zero-redundancy ACK tracking without TCP-like blocking or redundant ACK roundtrips.
 - **Microsecond Sub-Tick Queue**: Captures inputs and actions at exact fractions within a server tick (`tick + fraction`).
+- **Server Lag Compensation ("Valve Time-Rewind")**: Server maintains rolling hitbox histories, rewinds entities to exact sub-tick timestamps, and performs 3D Ray-AABB intersection tests.
+- **Client Prediction & Rollback Reconciliation**: Predicts local movement instantaneously and automatically rolls back + re-simulates inputs upon authoritative server corrections.
+- **MTU-Safe Fragmentation & Token Bucket Pacing**: Slices oversized snapshots into MTU-safe fragments with out-of-order reassembly and rate-limits bandwidth.
 - **Jacobson/Karels RTT Estimation**: RFC 6298 smoothed round-trip time and jitter variance calculations.
 - **Bit-Level Quantization & Delta Compression**: Compresses 32-bit floating point vectors and entity states using bitmask change fields.
 - **Built-in Network Simulator**: Test suite runs against configurable packet loss, variable latency, and jitter.
@@ -39,6 +42,12 @@ Designed for real-time multiplayer games that require millisecond-accurate physi
        +--> [4. Sub-Tick Queue]   : Microsecond-precision input sorting within ticks
        |
        +--> [5. Delta Compression]: Dynamic state bitmasking & float quantization
+       |
+       +--> [6. Lag Compensation] : Historical hitbox rewinding & 3D raycast validation
+       |
+       +--> [7. Client Prediction]: Local movement simulation with server rollback
+       |
+       +--> [8. MTU Fragmentation]: Large payload slicing & token-bucket bandwidth pacing
 ```
 
 ---
