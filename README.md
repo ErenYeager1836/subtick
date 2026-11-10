@@ -1,5 +1,9 @@
 # subtick
 
+[![CI](https://github.com/ErenYeager1836/subtick/actions/workflows/ci.yml/badge.svg)](https://github.com/ErenYeager1836/subtick/actions)
+[![Language](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://en.cppreference.com/w/cpp/20)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A high-performance, zero-dependency **C++20** reliable UDP game networking engine inspired by Valve's **Counter-Strike 2 sub-tick architecture** and Glenn Fiedler's virtual ACK bitfield model.
 
 Designed for real-time multiplayer games that require millisecond-accurate physics, anti-lag compensation, and deterministic sub-tick event ordering over lossy UDP networks.
