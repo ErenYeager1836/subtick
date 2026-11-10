@@ -14,19 +14,22 @@ struct SimulatedPacket {
     uint64_t deliver_at_us{0};
 };
 
+struct NetworkSimulatorConfig {
+    float packet_loss_rate{0.0f};      // 0.0 to 1.0 (e.g. 0.05 = 5% loss)
+    uint32_t latency_ms{0};            // Base one-way latency in milliseconds
+    uint32_t jitter_ms{0};             // Latency variance in milliseconds
+    float duplicate_rate{0.0f};        // Duplicate packet injection rate
+    float reorder_rate{0.0f};          // Out-of-order delivery rate
+};
+
 class NetworkSimulator {
 public:
-    struct Config {
-        float packet_loss_rate{0.0f};      // 0.0 to 1.0 (e.g. 0.05 = 5% loss)
-        uint32_t latency_ms{0};            // Base one-way latency in milliseconds
-        uint32_t jitter_ms{0};             // Latency variance in milliseconds
-        float duplicate_rate{0.0f};        // Duplicate packet injection rate
-        float reorder_rate{0.0f};          // Out-of-order delivery rate
+    using Config = NetworkSimulatorConfig;
 
-        Config() = default;
-    };
+    NetworkSimulator()
+        : NetworkSimulator(Config{}, 42) {}
 
-    explicit NetworkSimulator(Config config = Config{}, uint32_t seed = 42)
+    explicit NetworkSimulator(Config config, uint32_t seed = 42)
         : config_(config), rng_(seed), dist_01_(0.0f, 1.0f) {}
 
     void send(Packet packet) {
